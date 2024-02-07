@@ -100,17 +100,26 @@
     const publicationTime = document.querySelector("#publication-time");
     const publicationTimeZone = document.querySelector("#publication-timezone");
 
-    // Create the calendar
-    const myCalendar = jsCalendar.new(element, "now", {
-      monthFormat : "month YYYY",
-    });
-
-
     let dropDown = true;
     let date;
     let time = publicationTime.value;
     let timeZone = publicationTimeZone.value;
     let final;
+    let calendarDate = "now";
+
+    // Create the calendar
+    const myCalendar = jsCalendar.new(element, calendarDate, {
+      monthFormat : "month YYYY",
+    });
+
+
+    function setCalendar(selectedDate) {
+      const [month, day, year] = selectedDate.split('/');
+      const formattedDate = `${day}/${month}/${year}`;
+      calendarDate = formattedDate;
+      myCalendar.set(calendarDate);
+    }
+
 
     function updateFinal (selectedDate) {
       date = selectedDate;
@@ -127,8 +136,8 @@
       });
 
       if(dropDown) {
-        dateqww = dateS;
-        updateFinal(dateS)
+        updateFinal(dateS);
+        setCalendar(dateS);
       }
     });
 
