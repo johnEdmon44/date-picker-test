@@ -7,13 +7,144 @@
 
   <link rel="stylesheet" href="output.css">
 
-  <script src="index.js" defer></script>
+  <!-- jsCalendar v1.4.5 Javascript and CSS from unpkg cdn -->
+  <script src="https://unpkg.com/simple-jscalendar@1.4.5/source/jsCalendar.min.js" integrity="sha384-F3Wc9EgweCL3C58eDn9902kdEH6bTDL9iW2JgwQxJYUIeudwhm4Wu9JhTkKJUtIJ" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://unpkg.com/simple-jscalendar@1.4.5/source/jsCalendar.min.css" integrity="sha384-CTBW6RKuDwU/TWFl2qLavDqLuZtBzcGxBXY8WvQ0lShXglO/DsUvGkXza+6QTxs0" crossorigin="anonymous">
 </head>
 <body>
+  <section class="grid place-content-center mt-20">
+    <h1 class="font-bold">Date and time<span class="text-red-700">*</span></h1>
 
-  <h1 class="text-3xl font-bold">
-    Hello world!
-  </h1>
+    <div class="flex gap-3 items-center">
+      <input class="accent-red-700 cursor-pointer w-4 h-4" type="checkbox" name="publish-asap" id="publish-asap">
+      <label>Publish ASAP</label>
+
+      <!-- info-circle-icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+      </svg>
+    </div>
+
+
+    <div class="relative w-80">
+      <div>
+        <p class="text-gray-600">Publication date:</p>
+
+        <div class="flex relative items-center">
+          <!-- calendar-icon -->
+          <svg class="w-5 h-5 absolute left-2" style="color: rgb(128, 128, 128);" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24"><path d="M12,19a1,1,0,1,0-1-1A1,1,0,0,0,12,19Zm5,0a1,1,0,1,0-1-1A1,1,0,0,0,17,19Zm0-4a1,1,0,1,0-1-1A1,1,0,0,0,17,15Zm-5,0a1,1,0,1,0-1-1A1,1,0,0,0,12,15ZM19,3H18V2a1,1,0,0,0-2,0V3H8V2A1,1,0,0,0,6,2V3H5A3,3,0,0,0,2,6V20a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V6A3,3,0,0,0,19,3Zm1,17a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V11H20ZM20,9H4V6A1,1,0,0,1,5,5H6V6A1,1,0,0,0,8,6V5h8V6a1,1,0,0,0,2,0V5h1a1,1,0,0,1,1,1ZM7,15a1,1,0,1,0-1-1A1,1,0,0,0,7,15Zm0,4a1,1,0,1,0-1-1A1,1,0,0,0,7,19Z" fill="#808080"></path></svg>
+
+          <input 
+            id="output-date" 
+            class="w-full pl-7 border-2 outline-none cursor-pointer" 
+            placeholder="Select release date"
+            onclick="toggleDropDown()"
+            >
+
+          <!-- caret-down-icon -->
+          <svg class="absolute right-3" style="color: rgb(128, 128, 128);" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z" fill="#808080"></path> </svg>
+        </div>
+      </div>
+
+
+      <!-- dropdown -->
+      <div id="dropDown" class="flex flex-col items-center hidden">
+        <div id="my-calendar" class="red">   
+        </div>
+  
+        <div class="flex gap-10">
+          <!--  -->
+          <div class="flex flex-col">
+            <label class="text-xs font-bold" for="publication-time">Publication Time</label>
+            <select class="text-sm bg-white border-2 pt-1 pl-4 pr-4 pb-1 rounded" id="publication-time" onclick="timeSelect()">
+              <option selected="selected" value="09:00 AM">9:00 AM</option>
+              <option value="09:30 AM">9:30 AM</option>
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="10:30 AM">10:30 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="11:30 AM">11:30 AM</option>
+              <option value="12:00 PM">12:00 PM</option>
+              <option value="12:30 PM">12:30 PM</option>
+              <option value="01:00 PM">1:00 PM</option>
+              <option value="01:30 PM">1:30 PM</option>
+              <option value="02:00 PM">2:00 PM</option>
+              <option value="02:30 PM">2:30 PM</option>
+              <option value="03:00 PM">3:00 PM</option>
+              <option value="03:30 PM">3:30 PM</option>
+              <option value="04:00 PM">4:00 PM</option>
+              <option value="04:30 PM">4:30 PM</option>
+              <option value="05:00 PM">5:00 PM</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col">
+            <label class="text-xs font-bold" for="publication-timezone">Publication Timezone</label>
+            <select class="text-sm bg-white border-2 pt-1 pl-4 pr-4 pb-1 rounded" id="publication-timezone" onclick="timeZoneSelect()">
+              <option selected="selected" value="EST">EST</option>
+              <option value="UTC">UTC</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
   
 </body>
+<script type="text/Javascript">
+    const outputDate = document.querySelector("#output-date");
+    const element = document.getElementById("my-calendar");
+    const dropDownElement = document.querySelector("#dropDown");
+    const publicationTime = document.querySelector("#publication-time");
+    const publicationTimeZone = document.querySelector("#publication-timezone");
+
+    // Create the calendar
+    const myCalendar = jsCalendar.new(element, "now", {
+      monthFormat : "month YYYY",
+    });
+
+
+    let dropDown = true;
+    let date;
+    let time = publicationTime.value;
+    let timeZone = publicationTimeZone.value;
+    let final;
+
+    function updateFinal (selectedDate) {
+      date = selectedDate;
+      final = `${date || ''} ${time} (${timeZone})`;
+      outputDate.value = final;
+    }
+
+
+    myCalendar.onDateClick(function(event, date){
+      const dateS = date.toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+
+      if(dropDown) {
+        dateqww = dateS;
+        updateFinal(dateS)
+      }
+    });
+
+    function toggleDropDown() {
+      dropDownElement.classList.toggle("hidden");
+    }
+
+
+    function timeSelect() {
+      time = publicationTime.value;
+      updateFinal(date);
+    }
+
+
+    function timeZoneSelect() {
+      timeZone = publicationTimeZone.value;
+      updateFinal(date);
+    }
+</script>
 </html>
